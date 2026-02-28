@@ -1,77 +1,36 @@
 using System;
 
-public class Program
+class Proyecto
 {
-    public static void Main()
+    static void Main()
     {
-        string tipoVehiculo;
-        int horas;
-        bool esFestivo;
-        decimal tarifa = 0;
-        decimal total;
+        // Variables
+        string nombre;
+        double nota1, nota2, nota3, promedio;
 
-        // 🔹 Entrada tipo de vehículo
-        Console.WriteLine("Ingrese el tipo de vehículo (carro, moto, camioneta):");
-        tipoVehiculo = Console.ReadLine().ToLower();
+        // Entrada
+        Console.Write("Nombre del estudiante: ");
+        nombre = Console.ReadLine();
 
-        // 🔹 Validar horas (0 a 24)
-        do
-        {
-            Console.WriteLine("Ingrese la cantidad de horas (0 - 24):");
-        }
-        while (!int.TryParse(Console.ReadLine(), out horas) || horas < 0 || horas > 24);
+        Console.Write("Nota 1: ");
+        nota1 = Convert.ToDouble(Console.ReadLine());
 
-        // 🔹 Entrada día festivo
-        Console.WriteLine("¿Es día festivo? (true/false):");
-        while (!bool.TryParse(Console.ReadLine(), out esFestivo))
-        {
-            Console.WriteLine("Ingrese solo true o false:");
-        }
+        Console.Write("Nota 2: ");
+        nota2 = Convert.ToDouble(Console.ReadLine());
 
-        // 🔹 Asignar tarifa según tipo de vehículo
-        if (tipoVehiculo == "carro")
-        {
-            tarifa = 3000;
-        }
-        else if (tipoVehiculo == "moto")
-        {
-            tarifa = 1500;
-        }
-        else if (tipoVehiculo == "camioneta")
-        {
-            tarifa = 4000;
-        }
+        Console.Write("Nota 3: ");
+        nota3 = Convert.ToDouble(Console.ReadLine());
+
+        // Proceso
+        promedio = (nota1 + nota2 + nota3) / 3;
+
+        // Salida
+        Console.WriteLine("\nEstudiante: " + nombre);
+        Console.WriteLine("Promedio: " + promedio);
+
+        if (promedio >= 3.0)
+            Console.WriteLine("Estado: Aprobó");
         else
-        {
-            Console.WriteLine("Tipo de vehículo no válido.");
-            return;
-        }
-
-        // 🔹 Calcular subtotal
-        total = tarifa * horas;
-
-        // 🔹 Aumento por festivo (20%)
-        if (esFestivo)
-        {
-            total += total * 0.20m;
-        }
-
-        // 🔹 Descuento por más de 8 horas (10%)
-        if (horas > 8)
-        {
-            total -= total * 0.10m;
-        }
-
-        // 🔹 Regla adicional:
-        // Si es camioneta Y horas > 12 → recargo adicional 5%
-        if (tipoVehiculo == "camioneta" && horas > 12)
-        {
-            total += total * 0.05m;
-        }
-
-        // 🔹 Salida
-        Console.WriteLine("=================================");
-        Console.WriteLine("Valor total a pagar: $" + total);
-        Console.WriteLine("=================================");
+            Console.WriteLine("Estado: Reprobó");
     }
 }
